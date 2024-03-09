@@ -52,6 +52,7 @@ class Shop(object):
 
     def show_products(self):
         print("-------- Lista de productos --------")
+        print("Producto \t\t precio")
         cont = 1
         for product in self.__products:
             print(f"{cont}. {product.name} \t {product.price}")

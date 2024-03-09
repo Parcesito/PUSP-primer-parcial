@@ -28,6 +28,7 @@ def show_shops(shops: list[shop]):
         cont += 1
     print("------------------------------------------------------------")
 
+
 def delete_shop(shops: list):
     index = 0
     aux = 0
@@ -52,7 +53,7 @@ def delete_shop(shops: list):
         os.system("cls")
         return
     else:
-        shops.pop(index-1)
+        shops.pop(index - 1)
         print("------------------------------------------------------")
         print("          El establecimiento ha sido eliminado")
         print("                       exitosamente")
@@ -60,6 +61,7 @@ def delete_shop(shops: list):
         time.sleep(1)
         os.system("cls")
         return
+
 
 def modify_shop(shops: list):
     index = 0
@@ -263,11 +265,11 @@ def indicators(persons: list, shops: list):
     print("                         USUARIOS ")
     print(f"Usuarios activos: {len(persons)}")
     print(f"Monto total almacenado en los usuarios: {cont_1}")
-    print(f"Monto promedio del usuario: {cont_1/len(persons)}")
+    print(f"Monto promedio del usuario: {cont_1 / len(persons)}")
     print(f"Total de deudas activas: {cont_2}")
-    print(f"Cantidad promedio de deudas por usuario: {cont_2/len(persons)}")
+    print(f"Cantidad promedio de deudas por usuario: {cont_2 / len(persons)}")
     print(f"Deuda total de los usuarios: {cont_3}")
-    print(f"Deuda promedio del usuario: {cont_3/len(persons)}\n")
+    print(f"Deuda promedio del usuario: {cont_3 / len(persons)}\n")
     print("                         TIENDAS")
     for shop in shops:
         cont_1 += shop.money
@@ -275,13 +277,57 @@ def indicators(persons: list, shops: list):
         cont_3 += len(shop.products)
     print(f"Tiendas activas: {len(shops)}")
     print(f"Monto total en tiendas: {cont_1}")
-    print(f"Monto promedio en tiendas: {cont_1/len(shops)}")
+    print(f"Monto promedio en tiendas: {cont_1 / len(shops)}")
     print(f"Total de productos rentables ofrecidos: {cont_2}")
-    print(f"Promedio de productos rentables ofrecidos por tienda: {cont_2/len(shops)}")
+    print(f"Promedio de productos rentables ofrecidos por tienda: {cont_2 / len(shops)}")
     print(f"Total de productos ofrecidos: {cont_3}")
-    print(f"Promedio de productos ofrecidos por tienda: {cont_3/len(shops)}")
+    print(f"Promedio de productos ofrecidos por tienda: {cont_3 / len(shops)}")
     print("---------------------------------------------------------")
     input("Pressione ENTER para continuar")
     time.sleep(1)
     os.system("cls")
+
+
+def admin_menu(persons: list, shops: list):
+    option = 0
+    while True:
+        print("------------------- MENÚ PRINCIPAL ----------------------")
+        print("1. Ver indicadores ")
+        print("2. Recargar a usuarios ")
+        print("3. Gestionar tienda")
+        print("4. Añadir tienda ")
+        print("5. Eliminar tienda ")
+        print("6. Cerrar sesión y salir ")
+        print("---------------------------------------------------------")
+        option = validate.validate_positive_float(input("Por favor, ingrese el número relacionado a la opción"
+                                                        "que desea ejecutar: "))
+        if option == 1:
+            indicators(persons, shops)
+
+        elif option == 2:
+            recharge_person(persons)
+
+        elif option == 3:
+            modify_shop(shops)
+
+        elif option == 4:
+            create_shop(shops)
+
+        elif option == 5:
+            delete_shop(shops)
+
+        elif option == 6:
+            print("---------------------------------------------------------\n")
+            print("                   Su sesion ha finalizado")
+            print("                Regresando al inicio de sesión\n")
+            print("---------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+
+        else:
+            print("---------------------------------------------------------\n")
+            print("              La opción ingresada no existe")
+            print("                   Inténtelo nuevamente\n")
+            print("---------------------------------------------------------")
+
 

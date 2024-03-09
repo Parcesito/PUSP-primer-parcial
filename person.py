@@ -13,10 +13,15 @@ class Person(user.User):
         self.__money = 0
         self.__history = []
         self.__actual_doubts = []
+        self.__total_debt = 0
 
     @property
     def max_doubt(self):
         return self.__max_doubt
+
+    @property
+    def total_debt(self):
+        return self.__total_debt
 
     @property
     def money(self):
@@ -37,6 +42,10 @@ class Person(user.User):
     @money.setter
     def money(self, money: float):
         self.__money = money
+
+    @total_debt.setter
+    def total_debt(self, total_debt: float):
+        self.__total_debt = total_debt
 
     def add_purchease(self, new: bill):
         self.__history.append(new)
