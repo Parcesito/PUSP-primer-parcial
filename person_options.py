@@ -202,6 +202,9 @@ def order(user: Person, shops: list[Shop]):
             print("------------------------------------------------------\n")
             print("                  Producto solicitado \n")
             print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+            break
 
 
 def return_debt(user: Person):
@@ -229,3 +232,83 @@ def return_debt(user: Person):
         print("------------------------------------------------------")
         time.sleep(1)
         os.system("cls")
+
+
+def pay_archive_bill(user):
+    print("--------------------------- Deudas actuales ----------------------")
+    for debt in user.actual_doubts:
+        print(f"{debt.name} \t\t {debt.payment_amount}")
+    print("------------------------------------------------------------------")
+    index = validate.validate_positive_float(input("Por favor, ingrese el número relacionado a "
+                                                   "la deuda que desea pagar"))
+    try:
+        aux = user.actual_doubts[index - 1]
+    except IndexError:
+        print("------------------------------------------------------\n")
+        print("                    Deuda no encontrada \n")
+        print("------------------------------------------------------")
+        time.sleep(1)
+        os.system("cls")
+    else:
+        pay_bill(user, aux)
+
+
+def user_menu(user: Person, shops: list):
+    while True:
+        print(f"Usuario: {user.name} {user.last_name}")
+        print("------------------ Menú de usuario ------------------")
+        print("1. Revisar saldo y deudas actuales")
+        print("2. Revisar préstamos activos")
+        print("3. Realizar compra")
+        print("4. Apartar equipo")
+        print("5. Pagar deudas")
+        print("6. Devolver equipos")
+        print("7. Cerrar sesión y salir")
+        print("-----------------------------------------------------\n")
+        option = validate.validate_positive_float(input("Por favor, ingrese el número relacionado con la acción"
+                                                        "que desea ejecutar"))
+        os.system("cls")
+        if option == 1:
+            actualizate_debts(user)
+            print("------------------ Saldos actuales ------------------")
+            print(f"El presupuesto actual es de: {user.money}")
+            print(f"La deuda actual es de {user.total_debt}")
+            print("-----------------------------------------------------")
+            input("Por favor, ingrese ENTER para volver al menú principal")
+            os.system("cls")
+
+        elif option == 2:
+            user.print_actual_debts()
+            input("Por favor, ingrese ENTER para volver al menú principal")
+            os.system("cls")
+
+        elif option == 3:
+            purchease(user, shops)
+
+        elif option == 4:
+            order(user, shops)
+
+        elif option == 5:
+            pay_archive_bill(user)
+        elif option == 6:
+            return_debt(user)
+        elif option == 7:
+            print("------------------------------------------------------\n")
+            print("                    Cerrando sesión\n")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+            print("------------------------------------------------------\n")
+            print("                    Sesión finalizada \n")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+            break
+
+        else:
+            print("------------------------------------------------------\n")
+            print("                    Opción no reconocida")
+            print("                    Inténtelo nuevamente\n")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")

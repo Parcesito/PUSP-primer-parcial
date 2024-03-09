@@ -3,7 +3,7 @@ from product import Product
 
 
 class Bill(object):
-    def __init__(self, owner, products: list, bill_date: date, name: str, payment_amount: float):
+    def __init__(self, owner, products: list[Product], bill_date: date, name: str, payment_amount: float):
         self.__owner = owner
         self.__products = products
         self.__payment_amount = payment_amount

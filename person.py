@@ -102,7 +102,7 @@ class Person(user.User):
     def print_actual_debts(self):
         cont = 1
         for debt in self.__actual_debts:
-            print("------------------- Deudas de préstamos -------------")
-            print("Acreedor \t\t suma")
-            print(f"{cont}. {debt.amount} \t\t {debt.amount*(debt.date-date.today())}")
+            print("------------------- Entidades con préstamos activos -------------")
+            print("Acreedor \t\t suma por día \t\t deuda actual")
+            print(f"{cont}. {debt.amount} \t\t {debt.amount} \t\t {debt.amount*(date.today()-debt.date)}")
             cont += 1
