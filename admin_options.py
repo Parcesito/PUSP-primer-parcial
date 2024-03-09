@@ -1,4 +1,3 @@
-import person
 from person import Person
 from leasable import Leasable
 import shop
@@ -63,7 +62,7 @@ def delete_shop(shops: list):
         return
 
 
-def modify_shop(shops: list):
+def modify_shop(shops: list[shop]):
     index = 0
     aux = 0
     show_shops(shops)
@@ -173,7 +172,7 @@ def modify_shop(shops: list):
             time.sleep(1)
             os.system("cls")
             try:
-                aux = aux.leasables[index - 1]
+                aux = aux.leasable[index - 1]
             except IndexError:
                 print("------------------------------------------------------")
                 print("            No se ha encontrado el equipo rentable")
@@ -219,7 +218,7 @@ def modify_shop(shops: list):
             os.system("cls")
 
 
-def recharge_person(persons: list):
+def recharge_person(persons: list[Person]):
     bandera = 0
     id = 0
     aux = 0
@@ -234,7 +233,7 @@ def recharge_person(persons: list):
     while True:
         print("------------------- Recarga de usuarios -------------------")
         print("                       Recargando a: ")
-        print(f"              {aux.first_name} {aux.last_name}")
+        print(f"              {aux.name} {aux.last_name}")
         id = validate.validate_positive_float(input("Por favor, ingrese el saldo a recargar: "))
         if input(f"¿Confirma que el saldo a recargar es de {id}? Y/N" == "Y"):
             break
@@ -252,7 +251,7 @@ def recharge_person(persons: list):
     os.system("cls")
 
 
-def indicators(persons: list, shops: list):
+def indicators(persons: list, shops: list[shop]):
     cont_1 = 0
     cont_2 = 0
     cont_3 = 0
@@ -288,7 +287,7 @@ def indicators(persons: list, shops: list):
     os.system("cls")
 
 
-def admin_menu(persons: list, shops: list):
+def admin_menu(persons: list, shops: list[shop]):
     option = 0
     while True:
         print("------------------- MENÚ PRINCIPAL ----------------------")

@@ -101,5 +101,4 @@ class Shop(object):
             print("No ha sido posible modificar el valor del equipo rentable")
         else:
             self.__leasables[(index - 1)].price = new
-
             print("El valor del equipo rentable ha sido actualizado")

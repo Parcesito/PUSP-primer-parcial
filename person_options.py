@@ -4,7 +4,9 @@ import validate
 from shop import Shop
 import time
 import os
-from datetime import datetime
+from debt import Debt
+from datetime import datetime, date
+from product import Product
 
 
 def actualizate_debts(user: Person):
@@ -89,11 +91,13 @@ def purchease(user: Person, shops: list):
             print("------------------------------------------------------")
             time.sleep(1)
             os.system("cls")
+            continue
         else:
-            aux.showproducts()
-            index_2 = int(validate.validate_positive_float(input("Por favor, ingrese el número relacionado al producto "
-                                                                 "que desea comprar: ")))
             while True:
+                aux.showproducts()
+                index_2 = int(validate.validate_positive_float(input("Por favor, ingrese el número relacionado "
+                                                                     "al producto que desea comprar: ")))
+
                 try:
                     temporal_car.append(aux.products[index_2 - 1])
                 except IndexError:
@@ -107,6 +111,7 @@ def purchease(user: Person, shops: list):
                     print("------------------------------------------------------")
                     time.sleep(1)
                     os.system("cls")
+                    continue
                 else:
                     print("------------------------------------------------------\n")
                     print("                    Producto añadido \n")
@@ -123,7 +128,7 @@ def purchease(user: Person, shops: list):
     for product in temporal_car:
         index += product.price
 
-    bill = Bill(user, temporal_car, datetime.date, "Múltiples dependencias", index)
+    bill = Bill(user, temporal_car, date.today(), "Múltiples dependencias", index)
     bill.print_bill()
 
     while True:
@@ -147,4 +152,80 @@ def purchease(user: Person, shops: list):
             os.system("cls")
             return
 
-def order(user: Person, shops: list):
+
+def order(user: Person, shops: list[Shop]):
+    index = 0
+    index_2 = 0
+    aux = 0
+    bill = 0
+    temporal_car = []
+    bandera = 0
+
+    while True:
+        show_shops(shops)
+        index = int(validate.validate_positive_float(input("Por favor, ingrese el número relacionado a la tienda "
+                                                           "en la que desea realizar su compra: ")))
+        try:
+            aux = shops[index - 1]
+        except IndexError:
+            print("------------------------------------------------------")
+            print("       No se ha encontrado el establecimiento")
+            print("                       solicitado.")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            print("------------------------------------------------------\n")
+            print("                  Inténtelo nuevamente \n")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+            continue
+        else:
+            aux.show_leasables()
+            index_2 = int(validate.validate_positive_float(input("Por favor, ingrese el número relacionado al "
+                                                                 "producto que desea solicitar: ")))
+        try:
+            temporal = aux.leasable[index_2 - 1]
+        except IndexError:
+            print("------------------------------------------------------")
+            print("            No se ha encontrado el producto")
+            print("                       solicitado.")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            print("------------------------------------------------------\n")
+            print("                  Inténtelo nuevamente \n")
+            print("------------------------------------------------------")
+            time.sleep(1)
+            os.system("cls")
+            continue
+        else:
+            user.actual_debts.append(Debt(aux, user, temporal.price, date.today()))
+            print("------------------------------------------------------\n")
+            print("                  Producto solicitado \n")
+            print("------------------------------------------------------")
+
+
+def return_debt(user: Person):
+    user.print_actual_debts()
+    index = validate.validate_positive_float(input("Ingrese el número asociado al equipo retornado: "))
+    try:
+        aux = user.actual_debts[index - 1]
+    except IndexError:
+        print("------------------------------------------------------")
+        print("            No se ha encontrado el producto")
+        print("                       solicitado.")
+        print("------------------------------------------------------")
+        time.sleep(1)
+        print("------------------------------------------------------\n")
+        print("                  Inténtelo nuevamente \n")
+        print("------------------------------------------------------")
+        time.sleep(1)
+        os.system("cls")
+    else:
+        user.actual_doubts.append(Bill(user, [Product(f"Préstamo realizado en {aux.name}", aux.price)],
+                                       date.today(), aux.creditor.name, aux.amount * (date.today() - aux.date)))
+        user.actual_debts.pop(index - 1)
+        print("------------------------------------------------------\n")
+        print("             Producto retornado de forma efectiva \n")
+        print("------------------------------------------------------")
+        time.sleep(1)
+        os.system("cls")

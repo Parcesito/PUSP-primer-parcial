@@ -14,6 +14,11 @@ class Person(user.User):
         self.__history = []
         self.__actual_doubts = []
         self.__total_debt = 0
+        self.__actual_debts = []
+
+    @property
+    def actual_debts(self):
+        return self.__actual_debts
 
     @property
     def max_doubt(self):
@@ -47,6 +52,10 @@ class Person(user.User):
     def total_debt(self, total_debt: float):
         self.__total_debt = total_debt
 
+    @actual_debts.setter
+    def actual_debts(self, active_loans):
+        self.__actual_debts = active_loans
+
     def add_purchease(self, new: bill):
         self.__history.append(new)
 
@@ -67,7 +76,7 @@ class Person(user.User):
         cont = 1
         index = 0
         print("------ Lista de deudas existentes --------")
-        for debt in self.__actual_doubts:
+        for debt in self.__actual_debts:
             print(f"{cont}. {debt.creditor} . . . . .  {debt.amount}")
             cont += 1
 
@@ -89,3 +98,11 @@ class Person(user.User):
                 self.__actual_doubts[index-1].creditor.money += cont
                 self.__actual_doubts.pop(index-1)
                 print("La deuda se ha saldado exitosamente. Su nuevo monto es de ", self.__money)
+
+    def print_actual_debts(self):
+        cont = 1
+        for debt in self.__actual_debts:
+            print("------------------- Deudas de préstamos -------------")
+            print("Acreedor \t\t suma")
+            print(f"{cont}. {debt.amount} \t\t {debt.amount*(debt.date-date.today())}")
+            cont += 1
