@@ -235,7 +235,8 @@ def recharge_person(persons: list[Person]):
         print("                       Recargando a: ")
         print(f"              {aux.name} {aux.last_name}")
         id = validate.validate_positive_float(input("Por favor, ingrese el saldo a recargar: "))
-        if input(f"¿Confirma que el saldo a recargar es de {id}? Y/N") == "Y":
+        if (input(f"¿Confirma que el saldo a recargar es de {id}? Y/N")
+                == "Y"):
             break
         else:
             print("Reintentando. . .")

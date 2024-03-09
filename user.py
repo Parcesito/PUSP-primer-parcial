@@ -30,6 +30,7 @@ class User(object):
     def last_name(self):
         return self.__last_name
 
+
     @property
     def birth_date(self):
         return self.__birth_date
