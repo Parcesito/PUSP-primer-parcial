@@ -24,7 +24,6 @@ class Shop(object):
     def leasables(self):
         return self.__leasables
 
-
     @property
     def money(self):
         return self.__money

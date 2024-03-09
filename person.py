@@ -106,4 +106,3 @@ class Person(user.User):
             print("Acreedor \t\t suma por día \t\t deuda actual")
             print(f"{cont}. {debt.amount} \t\t {debt.amount} \t\t {debt.amount*(date.today()-debt.date)}")
             cont += 1
-

@@ -54,4 +54,3 @@ shops = [Shop("Gimnasio")]
 shops[0].add_leasable(Leasable("Bicicleta", 4000, False))
 shops[0].add_product(Product("Bebida energética", 5000))
 pusp(users, admins, shops)
-
