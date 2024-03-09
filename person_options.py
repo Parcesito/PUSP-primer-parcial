@@ -146,3 +146,5 @@ def purchease(user: Person, shops: list):
             time.sleep(1)
             os.system("cls")
             return
+
+def order(user: Person, shops: list):
