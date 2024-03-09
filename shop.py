@@ -21,7 +21,7 @@ class Shop(object):
         return self.__products
 
     @property
-    def leasable(self):
+    def leasables(self):
         return self.__leasables
 
     @property

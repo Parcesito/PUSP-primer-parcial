@@ -235,7 +235,7 @@ def recharge_person(persons: list[Person]):
         print("                       Recargando a: ")
         print(f"              {aux.name} {aux.last_name}")
         id = validate.validate_positive_float(input("Por favor, ingrese el saldo a recargar: "))
-        if input(f"¿Confirma que el saldo a recargar es de {id}? Y/N" == "Y"):
+        if input(f"¿Confirma que el saldo a recargar es de {id}? Y/N") == "Y":
             break
         else:
             print("Reintentando. . .")
@@ -322,11 +322,13 @@ def admin_menu(persons: list, shops: list[shop]):
             print("---------------------------------------------------------")
             time.sleep(1)
             os.system("cls")
+            break
 
         else:
             print("---------------------------------------------------------\n")
             print("              La opción ingresada no existe")
             print("                   Inténtelo nuevamente\n")
             print("---------------------------------------------------------")
+
 
 

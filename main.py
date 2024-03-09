@@ -3,9 +3,11 @@ import person_options
 import time
 import os
 from person import Person
+from product import Product
 from shop import Shop
 from user import User
 from datetime import date
+from leasable import Leasable
 
 
 def pusp(users: list, admins: list,  shops: list[Shop]):
@@ -37,10 +39,10 @@ def pusp(users: list, admins: list,  shops: list[Shop]):
         bandera = input("¿Desea iniciar sesión nuevamente Y/N: ")
         if bandera == "Y":
             continue
-
         print("--------------------------------------------------------------\n")
         print("            ¡Muchas gracias por utilizar el programa! \n")
         print("--------------------------------------------------------------\n")
+        break
 
 
 users = [Person(2000, "Carlos", "Álveres", date(1980, 12, 5), "user123",
@@ -48,6 +50,7 @@ users = [Person(2000, "Carlos", "Álveres", date(1980, 12, 5), "user123",
 
 admins = [User(1000, "Jhon", "Doe", date(1980, 12, 28), "admin123",
        "12345", True)]
-shops = []
-
+shops = [Shop("Gimnasio")]
+shops[0].add_leasable(Leasable("Bicicleta", 4000, False))
+shops[0].add_product(Product("Bebida energética", 5000))
 pusp(users, admins, shops)

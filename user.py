@@ -28,7 +28,7 @@ class User(object):
 
     @property
     def last_name(self):
-        return self
+        return self.__last_name
 
     @property
     def birth_date(self):
